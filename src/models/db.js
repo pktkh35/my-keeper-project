@@ -1,5 +1,6 @@
-import { USERS } from './schema/users'
 import mongoose from "mongoose";
+import { ROOMS } from "./schema/rooms";
+import { TASKS } from "./schema/tasks";
 
 if (mongoose.connect) {
     mongoose.connect(process.env.MONGODB_URL);
@@ -7,5 +8,6 @@ if (mongoose.connect) {
 }
 
 export {
-    USERS
+    ROOMS,
+    TASKS
 }
