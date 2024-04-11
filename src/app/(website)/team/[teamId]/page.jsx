@@ -6,12 +6,19 @@ import mongoose from 'mongoose'
 import Link from 'next/link'
 import { Each } from "@/components/Each";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { auth } from "@/lib/auth";
 
 const isOwner = (member, team) => member.email === team.creator
 
 const page = async ({
     params
 }) => {
+    const session = await auth();
+  
+    if (!session) {
+      redirect('/login');
+    }
+  
     const teams = await TEAMS.aggregate([
         {
             $lookup: {

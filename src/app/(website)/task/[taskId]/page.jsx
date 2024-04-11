@@ -3,10 +3,17 @@ import { redirect } from "next/dist/server/api-utils";
 import Link from 'next/link'
 import { ObjectId } from 'mongodb'
 import AddNewTask from "@/components/Task/AddNewTask";
+import { auth } from "@/lib/auth";
 
 const page = async ({
     params
 }) => {
+    const session = await auth();
+  
+    if (!session) {
+      redirect('/login');
+    }
+  
     const { taskId } = params
     const group = await GROUPS.findOne({
         _id: taskId

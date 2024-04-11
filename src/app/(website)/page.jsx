@@ -5,6 +5,11 @@ import { TEAMS } from "@/models/db";
 
 const page = async () => {
   const session = await auth();
+
+  if (!session) {
+    redirect('/login');
+  }
+
   const teams = await TEAMS.find({
     members: {
       $in: [session.user.email]
