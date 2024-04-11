@@ -3,7 +3,7 @@ import { Schema, Types, model, models } from "mongoose";
 const inviteSchema = new Schema({
     sender: String,
     reciever: String,
-    teamId: String,
+    teamId: Types.ObjectId,
     status: {
         type: String,
         default: "Waiting"
