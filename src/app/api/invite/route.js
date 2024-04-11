@@ -15,7 +15,7 @@ export const GET = async req => {
         {
             $match: {
                 reciever: user.email,
-                status: "waiting"
+                status: "Waiting"
             }
         },
         {
