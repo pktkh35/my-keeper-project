@@ -7,7 +7,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 const TeamsList = ({
     teams
 }) => {
-    return teams.length > 0 ? <div className="grid grid-cols-2 lg:grid-cols-4">
+    return teams.length > 0 ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <Each
             of={teams}
             render={team => <Link href={`/team/${team._id}`}>

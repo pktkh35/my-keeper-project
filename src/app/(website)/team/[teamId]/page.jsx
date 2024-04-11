@@ -58,11 +58,11 @@ const page = async ({
                     <SettingTeams team={team} />
                 </div>
             </div>
-            <div className="flex jusitfy-between gap-2 mt-2">
-                <div className="w-[75%]">
+            <div className="flex jusitfy-between gap-2 mt-2 flex-col md:flex-rows">
+                <div className="w-full md:w-[75%]">
                     <GroupsList list={groups} />
                 </div>
-                <div className="bg-gray-50 w-[25%] rounded p-5 box-border">
+                <div className="bg-gray-50 w-full md:w-[25%] rounded p-5 box-border">
                     <p className="text-md font-bold">
                         สมาชิกภายในทีม
                     </p>

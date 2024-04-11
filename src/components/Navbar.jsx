@@ -17,14 +17,9 @@ import { Each } from "./Each";
 import { Button } from "./ui/button";
 import toast from 'react-hot-toast'
 
-const Navbar = () => {
-    const session = useSession();
-    const [invites, setInvites] = useState([]);
-
-    useEffect(() => {
-        axios.get("/api/invite/").then(res => setInvites(res.data)).catch(err => { });
-    }, []);
-
+const InviteContent = ({
+    invites, setInvites
+}) => {
     const interactInvite = async (invite, type) => {
         const toastId = toast.loading('Loading...');
         const result = await axios.post("/api/invite/interact", {
@@ -43,71 +38,115 @@ const Navbar = () => {
         })
     }
 
-    return <>
-        <div className="sticky w-screen h-[60px] bg-gray-50 flex items-center justify-center border-b">
-            <div className="container flex items-center justify-between">
-                <Link className="font-bold text-md" href="/">
-                    My Keeper
-                </Link>
-                <div className="flex gap-2 items-center">
-                    {
-                        session.status === "authenticated" ? <>
-                            <div className="font-bold text-xs flex gap-1 items-center border-r pr-2 h-5">
-                                Welcome, <span className="opacity-50">{session.data.user?.name}</span>
-                                <Avatar>
-                                    <AvatarImage src={session.data.user?.image} />
-                                    <AvatarFallback>MK</AvatarFallback>
-                                </Avatar>
+    return <SheetContent>
+        <SheetHeader>
+            <SheetTitle>Your Invitations List</SheetTitle>
+            <SheetDescription>
+                {
+                    invites.length > 0 ? <Each
+                        of={invites}
+                        render={invite => <div className="border py-2 px-4 mb-2 rounded-sm">
+                            <div className="text-lg font-bold text-black">
+                                คำเชิญเข้าร่วมทีม
                             </div>
-                            <Sheet>
-                                <SheetTrigger>
-                                    <div className="cursor-pointer font-bold text-md relative mr-1">
-                                        Invite
-                                        {
-                                            invites.length > 0 ? <div className="absolute w-2 h-2 bg-red-500 bottom-[60%] left-[101%] rounded-full"></div> : null
-                                        }
-                                    </div>
-                                </SheetTrigger>
-                                <SheetContent>
-                                    <SheetHeader>
-                                        <SheetTitle>Your Invitations List</SheetTitle>
-                                        <SheetDescription>
-                                            {
-                                                invites.length > 0 ? <Each
-                                                    of={invites}
-                                                    render={invite => <div className="border py-2 px-4 mb-2 rounded-sm">
-                                                        <div className="text-lg font-bold text-black">
-                                                            คำเชิญเข้าร่วมทีม
-                                                        </div>
-                                                        <div className="text-md ml-2">
-                                                            คุณได้รับคำเชิญให้เข้าร่วมทีม <b>{invite.team.name}</b>
-                                                        </div>
-                                                        <div className="flex gap-2 mt-2 w-full">
-                                                            <Button size="sm" className="w-full" onClick={() => interactInvite(invite, "accept")}>
-                                                                ตอบรับ
-                                                            </Button>
-                                                            <Button variant="outline" size="sm" className="w-full" onClick={() => interactInvite(invite, "reject")}>
-                                                                ปฎิเสธ
-                                                            </Button>
-                                                        </div>
-                                                    </div>}
-                                                /> : <div className="w-full h-[256px] bg-gray-50 flex items-center justify-center font-bold text-xs">
-                                                    You don{"'"}t have any invitation.
-                                                </div>
-                                            }
-                                        </SheetDescription>
-                                    </SheetHeader>
-                                </SheetContent>
-                            </Sheet>
+                            <div className="text-md ml-2">
+                                คุณได้รับคำเชิญให้เข้าร่วมทีม <b>{invite.team.name}</b>
+                            </div>
+                            <div className="flex gap-2 mt-2 w-full">
+                                <Button size="sm" className="w-full" onClick={() => interactInvite(invite, "accept")}>
+                                    ตอบรับ
+                                </Button>
+                                <Button variant="outline" size="sm" className="w-full" onClick={() => interactInvite(invite, "reject")}>
+                                    ปฎิเสธ
+                                </Button>
+                            </div>
+                        </div>}
+                    /> : <div className="w-full h-[256px] bg-gray-50 flex items-center justify-center font-bold text-xs">
+                        You don{"'"}t have any invitation.
+                    </div>
+                }
+            </SheetDescription>
+        </SheetHeader>
+    </SheetContent>
+}
 
-                            <a onClick={() => signOut()} className="cursor-pointer font-bold text-md">
-                                Logout
-                            </a>
-                        </> : null
-                    }
+const Navbar = () => {
+    const session = useSession();
+    const [invites, setInvites] = useState([]);
+
+    useEffect(() => {
+        axios.get("/api/invite/").then(res => setInvites(res.data)).catch(err => { });
+    }, []);
+
+    return <>
+        <Sheet>
+            <div className="sticky w-screen h-[60px] bg-gray-50 flex items-center justify-center border-b">
+                <div className="container flex items-center justify-between">
+                    <Link className="font-bold text-md" href="/">
+                        My Keeper
+                    </Link>
+                    <div className="flex gap-2 items-center hidden md:visible">
+                        {
+                            session.status === "authenticated" ? <>
+                                <div className="font-bold text-xs flex gap-1 items-center border-r pr-2 h-5">
+                                    Welcome, <span className="opacity-50">{session.data.user?.name}</span>
+                                    <Avatar>
+                                        <AvatarImage src={session.data.user?.image} />
+                                        <AvatarFallback>MK</AvatarFallback>
+                                    </Avatar>
+                                </div>
+                                <Sheet>
+                                    <SheetTrigger asChild>
+                                        <div className="cursor-pointer font-bold text-md relative mr-1">
+                                            Invite
+                                            {
+                                                invites.length > 0 ? <div className="absolute w-2 h-2 bg-red-500 bottom-[60%] left-[101%] rounded-full"></div> : null
+                                            }
+                                        </div>
+                                    </SheetTrigger>
+                                    <InviteContent invites={invites} setInvites={setInvites} />
+                                </Sheet>
+                                <a onClick={() => signOut()} className="cursor-pointer font-bold text-md">
+                                    Logout
+                                </a>
+                            </> : null
+                        }
+                    </div>
+                    <SheetTrigger asChild>
+                        <div className="visible md:hidden">
+                            <i className="fa-solid fa-bars"></i>
+                        </div>
+                    </SheetTrigger>
                 </div>
             </div>
-        </div>
+            <SheetContent>
+                <SheetHeader>
+                    <SheetTitle className="flex gap-2 items-center">
+                        <Avatar className="w-6 h-6">
+                            <AvatarImage src={session.data?.user?.image} />
+                            <AvatarFallback>MK</AvatarFallback>
+                        </Avatar>
+                        Welcome, <span className="opacity-50">{session.data?.user?.name}</span>
+                    </SheetTitle>
+                    <SheetDescription>
+                        <Sheet>
+                            <SheetTrigger asChild>
+                                <div className="cursor-pointer h-8 font-bold text-md relative mr-1 leading-8 border-b">
+                                    Invite
+                                    {
+                                        invites.length > 0 ? <div className="absolute w-2 h-2 bg-red-500 bottom-[60%] left-[101%] rounded-full"></div> : null
+                                    }
+                                </div>
+                            </SheetTrigger>
+                            <InviteContent invites={invites} setInvites={setInvites} />
+                        </Sheet>
+                        <a onClick={() => signOut()} className="cursor-pointer font-bold text-md h-8 leading-8 w-full">
+                            Logout
+                        </a>
+                    </SheetDescription>
+                </SheetHeader>
+            </SheetContent>
+        </Sheet >
     </>
 }
 
