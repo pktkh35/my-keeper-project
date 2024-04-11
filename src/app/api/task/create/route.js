@@ -32,7 +32,8 @@ export const POST = async req => {
         status: "success",
         message: "Create Task Successfully",
         task: {
-            ...newTask._doc
+            ...newTask._doc,
+            creatorData: user
         }
     })
 }
