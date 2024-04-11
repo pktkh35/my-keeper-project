@@ -1,6 +1,6 @@
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import jwt from 'jsonwebtoken'
 import { getServerSession } from "next-auth"
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import DiscordProvider from "next-auth/providers/discord";
 import clientPromise from "./mongodb";
 
