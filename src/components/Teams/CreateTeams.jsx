@@ -15,19 +15,29 @@ import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import axios from "axios";
 import toast from 'react-hot-toast'
+import { useRouter } from "next/navigation"
+import { Textarea } from "../ui/textarea"
 
 const CreateTeams = () => {
+    const router = useRouter();
     const onSumbit = async e => {
         e.preventDefault();
         const form = Object.fromEntries(new FormData(e.target));
         const toastId = toast.loading('Creating room...');
-        const result = await axios.post("/api/rooms/create", form).then(res => res.data).catch(err => toast.error('Network Error', {
+        const result = await axios.post("/api/teams/create", form).then(res => res.data).catch(err => toast.error('Network Error', {
             id: toastId
         }));
 
-        toast.success(result.message, {
-            id: toastId
-        });
+        if (result?.status === "success") {
+            router.push('/team/'+result.teams._id);
+            toast.success(result.message, {
+                id: toastId
+            });
+        } else {
+            toast.error(result.message, {
+                id: toastId
+            });
+        }
     }
 
     return <Dialog>
@@ -44,16 +54,14 @@ const CreateTeams = () => {
                         You can invite member to your teams in setting page.
                     </DialogDescription>
                 </DialogHeader>
-                <div className="w-full flex flex-col mt-2">
-                    <div className="flex w-full gap-2">
-                        <div className="grid w-1/2 items-center gap-1.5">
-                            <Label htmlFor="avatar">Team Avatar</Label>
-                            <Input type="file" name="avatar" id="avatar" placeholder="Please, Enter Task Team Name" required />
-                        </div>
-                        <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="name">Team Name</Label>
-                            <Input type="text" name="name" id="name" placeholder="Please, Enter Task Team Name" required />
-                        </div>
+                <div className="w-full flex flex-col gap-2 mt-2">
+                    <div className="grid w-full items-center gap-1.5">
+                        <Label htmlFor="name">Team Name</Label>
+                        <Input type="text" name="name" id="name" placeholder="Please, Enter Task Team Name" required />
+                    </div>
+                    <div className="grid w-full items-center gap-1.5">
+                        <Label htmlFor="description">Team Description</Label>
+                        <Textarea name="description" id="description" placeholder="Input Description" required />
                     </div>
                 </div>
                 <DialogFooter className="mt-2 justify-start lg:justify-end">

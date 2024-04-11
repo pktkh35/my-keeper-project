@@ -5,6 +5,7 @@ const teamsSchema = new Schema({
         type: String,
         required: true,
     },
+    description: String,
     members: {
         type: Array,
         default: []

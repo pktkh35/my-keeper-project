@@ -1,17 +1,12 @@
-import { Schema, Types, model, models } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
 const taskSchema = new Schema({
-    taskId: {
-        type: Types.ObjectId,
-        required: true,
+    linkTo: {
+        type: String,
+        default: "task"
     },
     content: {
         type: Object,
-        default: []
-    },
-    status: {
-        type: String,
-        default: "waiting",
     },
     creator: {
         type: String,

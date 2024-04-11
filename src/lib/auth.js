@@ -28,8 +28,24 @@ const authOptions = {
     }
 }
 
+async function getUserFromToken(token) {
+    try {
+        const user = await jwt.verify(token, process.env.NEXTAUTH_SECRET);
+
+        return user
+    } catch (error) {
+        return null
+    }
+}
+
+function getToken(cookies) {
+    const token = cookies.get(process.env.NODE_ENV === "development" ? 'next-auth.session-token' : '__Secure-next-auth.session-token')
+
+    return token?.value
+}
+
 function auth(...args) {
     return getServerSession(...args, authOptions)
 }
 
-export { authOptions, auth }
+export { authOptions, auth, getUserFromToken, getToken }
