@@ -5,7 +5,7 @@ const PublicLayout = ({
 }) => {
   return <>
     <Navbar />
-    <main className="min-h-screen">
+    <main className="min-h-screen mb-2">
       {children}
     </main>
     <div className="w-screen h-12 border-t flex items-center justify-center text-xs font-medium">

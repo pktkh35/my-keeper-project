@@ -34,8 +34,6 @@ const page = async ({
         }
     ])
 
-    console.log(tasks)
-
     if (!group) {
         redirect('/');
     }
@@ -50,6 +48,9 @@ const page = async ({
                     <p className="font-bold text-md">
                         {group.name}
                     </p>
+                </div>
+                <div className="text-xs">
+                    {tasks.filter(t => t.status === "success")}/{tasks.length}
                 </div>
             </div>
             <div className="flex flex-col gap-2 mt-2">
