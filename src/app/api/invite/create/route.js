@@ -56,7 +56,7 @@ export const POST = async req => {
     const newInvites = new INVITES({
         sender: user.email,
         reciever: email,
-        teamId
+        teamId: new ObjectId(teamId),
     })
 
     await newInvites.save();
