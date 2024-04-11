@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-const roomsSchema = new Schema({
+const teamsSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -20,4 +20,4 @@ const roomsSchema = new Schema({
     },
 })
 
-export const ROOMS = models?.rooms || model("rooms", roomsSchema)
+export const TEAMS = models?.teams || model("teams", teamsSchema)

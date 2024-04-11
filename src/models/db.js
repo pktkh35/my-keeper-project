@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ROOMS } from "./schema/rooms";
+import { TEAMS } from "./schema/teams";
 import { TASKS } from "./schema/tasks";
 
 if (mongoose.connect) {
@@ -8,6 +8,6 @@ if (mongoose.connect) {
 }
 
 export {
-    ROOMS,
+    TEAMS,
     TASKS
 }
