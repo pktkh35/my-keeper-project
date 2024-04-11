@@ -1,7 +1,8 @@
-import { MongooseAdapter } from '@choutkamartin/mongoose-adapter';
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import jwt from 'jsonwebtoken'
 import { getServerSession } from "next-auth"
 import DiscordProvider from "next-auth/providers/discord";
+import clientPromise from "./mongodb";
 
 const authOptions = {
     jwt: {
@@ -12,7 +13,7 @@ const authOptions = {
             return jwt.verify(params.token, params.secret);
         },
     },
-    adapter: MongooseAdapter(process.env.MONGODB_URL),
+    adapter: MongoDBAdapter(clientPromise),
     providers: [
         DiscordProvider({
             clientId: process.env.DISCORD_CLIENT_ID,
