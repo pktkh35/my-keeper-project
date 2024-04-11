@@ -50,7 +50,7 @@ const page = async ({
                     </p>
                 </div>
                 <div className="text-xs">
-                    {tasks.filter(t => t.status === "success")}/{tasks.length}
+                    {tasks.filter(t => t.status === "success").length}/{tasks.length}
                 </div>
             </div>
             <div className="flex flex-col gap-2 mt-2">
