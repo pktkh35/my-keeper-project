@@ -98,7 +98,7 @@ const Navbar = () => {
                                 <Sheet>
                                     <SheetTrigger asChild>
                                         <div className="cursor-pointer font-bold text-md relative mr-1">
-                                            Invite
+                                            คำเชิญ
                                             {
                                                 invites.length > 0 ? <div className="absolute w-2 h-2 bg-red-500 bottom-[60%] left-[101%] rounded-full"></div> : null
                                             }
@@ -107,7 +107,7 @@ const Navbar = () => {
                                     <InviteContent invites={invites} setInvites={setInvites} />
                                 </Sheet>
                                 <a onClick={() => signOut()} className="cursor-pointer font-bold text-md">
-                                    Logout
+                                    ออกจากระบบ
                                 </a>
                             </> : null
                         }
@@ -132,7 +132,7 @@ const Navbar = () => {
                         <Sheet>
                             <SheetTrigger asChild>
                                 <div className="cursor-pointer h-8 font-bold text-md relative mr-1 leading-8 border-b">
-                                    Invite
+                                    คำเชิญ
                                     {
                                         invites.length > 0 ? <div className="absolute w-2 h-2 bg-red-500 bottom-[60%] left-[101%] rounded-full"></div> : null
                                     }
@@ -141,7 +141,7 @@ const Navbar = () => {
                             <InviteContent invites={invites} setInvites={setInvites} />
                         </Sheet>
                         <a onClick={() => signOut()} className="cursor-pointer font-bold text-md h-8 leading-8 w-full">
-                            Logout
+                            ออกจากระบบ
                         </a>
                     </SheetDescription>
                 </SheetHeader>
