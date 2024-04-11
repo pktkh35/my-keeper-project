@@ -49,11 +49,11 @@ const TaskList = ({
                                 }
                             </div>
                             <div className="flex flex-col">
-                                <div className="text-xl font-bold">
+                                <div className="text-md font-bold">
                                     {title}
                                 </div>
                                 {
-                                    task.content?.description !== "" && task.content?.name ? <p className="text-md">
+                                    task.content?.description !== "" && task.content?.name ? <p className="text-xs">
                                         {task.content?.description}
                                     </p> : null
                                 }
