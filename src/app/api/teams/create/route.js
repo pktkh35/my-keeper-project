@@ -20,7 +20,7 @@ export const POST = async req => {
         name,
         description,
         creator: user.email,
-        members: [user.sub],
+        members: [user.email],
     })
 
     await newTeams.save();

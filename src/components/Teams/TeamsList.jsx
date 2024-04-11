@@ -15,7 +15,9 @@ const TeamsList = ({
                     <CardHeader>
                         <CardTitle>{team.name.toUpperCase()}</CardTitle>
                         <CardDescription>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, a aut nihil expedita veritatis commodi placeat dolorum fuga porro recusandae neque ratione, eos quam distinctio. Id cupiditate voluptates minus et.
+                            {
+                                team.description
+                            }
                         </CardDescription>
                     </CardHeader>
                 </Card>
