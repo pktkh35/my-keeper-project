@@ -85,7 +85,7 @@ const Navbar = () => {
                     <Link className="font-bold text-md" href="/">
                         My Keeper
                     </Link>
-                    <div className="flex gap-2 items-center hidden md:visible">
+                    <div className="gap-2 items-center hidden md:flex">
                         {
                             session.status === "authenticated" ? <>
                                 <div className="font-bold text-xs flex gap-1 items-center border-r pr-2 h-5">
