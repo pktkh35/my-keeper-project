@@ -14,7 +14,8 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Each } from "./Each";
-
+import { Button } from "./ui/button";
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
     const session = useSession();
@@ -22,7 +23,25 @@ const Navbar = () => {
 
     useEffect(() => {
         axios.get("/api/invite/").then(res => setInvites(res.data)).catch(err => { });
-    }, [])
+    }, []);
+
+    const interactInvite = async (invite, type) => {
+        const toastId = toast.loading('Loading...');
+        const result = await axios.post("/api/invite/interact", {
+            id: invite._id,
+            type
+        }).then(res => res.data).catch(err => toast.error(err.message, {
+            id: toastId
+        }));
+
+        if (result?.status === "success") {
+            setInvites(prev => prev.filter(t => t._id !== invite._id));
+        }
+
+        toast[result?.status || "error"](result.message, {
+            id: toastId
+        })
+    }
 
     return <>
         <div className="sticky w-screen h-[60px] bg-gray-50 flex items-center justify-center border-b">
@@ -53,12 +72,29 @@ const Navbar = () => {
                                     <SheetHeader>
                                         <SheetTitle>Your Invitations List</SheetTitle>
                                         <SheetDescription>
-                                            <Each
-                                                of={invites}
-                                                render={invite => <div className="border p-4">
-
-                                                </div>}
-                                            />
+                                            {
+                                                invites.length > 0 ? <Each
+                                                    of={invites}
+                                                    render={invite => <div className="border py-2 px-4 mb-2 rounded-sm">
+                                                        <div className="text-lg font-bold text-black">
+                                                            คำเชิญเข้าร่วมทีม
+                                                        </div>
+                                                        <div className="text-md ml-2">
+                                                            คุณได้รับคำเชิญให้เข้าร่วมทีม <b>{invite.team.name}</b>
+                                                        </div>
+                                                        <div className="flex gap-2 mt-2 w-full">
+                                                            <Button size="sm" className="w-full" onClick={() => interactInvite(invite, "accept")}>
+                                                                ตอบรับ
+                                                            </Button>
+                                                            <Button variant="outline" size="sm" className="w-full" onClick={() => interactInvite(invite, "reject")}>
+                                                                ปฎิเสธ
+                                                            </Button>
+                                                        </div>
+                                                    </div>}
+                                                /> : <div className="w-full h-[256px] bg-gray-50 flex items-center justify-center font-bold text-xs">
+                                                    You don{"'"}t have any invitation.
+                                                </div>
+                                            }
                                         </SheetDescription>
                                     </SheetHeader>
                                 </SheetContent>

@@ -1,6 +1,7 @@
 import { authOptions, getToken, getUserFromToken } from "@/lib/auth";
 import dbConnect from "@/lib/mongoose";
 import { INVITES, TEAMS } from "@/models/db";
+import { ObjectId } from 'mongodb'
 
 export const POST = async req => {
     await dbConnect();
@@ -26,7 +27,7 @@ export const POST = async req => {
     }
 
     const team = await TEAMS.findOne({
-        _id: teamId,
+        _id: new ObjectId(teamId),
         members: {
             $in: [email]
         }
@@ -41,6 +42,7 @@ export const POST = async req => {
 
     const exitInvites = await INVITES.findOne({
         teamId,
+        status: "waiting",
         reciever: email
     })
 

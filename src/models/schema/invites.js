@@ -4,6 +4,10 @@ const inviteSchema = new Schema({
     sender: String,
     reciever: String,
     teamId: String,
+    status: {
+        type: String,
+        default: "Waiting"
+    },
     created_date: {
         type: Date,
         default: Date.now()

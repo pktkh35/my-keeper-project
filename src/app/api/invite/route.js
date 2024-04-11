@@ -11,9 +11,30 @@ export const GET = async req => {
     }
 
     const user = await getUserFromToken(token);
-    const invites = await INVITES.find({
-        reciever: user.email
-    });
+    const invites = await INVITES.aggregate([
+        {
+            $match: {
+                reciever: user.email,
+                status: "waiting"
+            }
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'sender',
+                foreignField: 'email',
+                as: 'senderData'
+            }
+        },
+        {
+            $lookup: {
+                from: 'teams',
+                localField: 'teamId',
+                foreignField: '_id',
+                as: 'team'
+            }
+        },
+    ]);
 
-    return Response.json(invites);
+    return Response.json(JSON.parse(JSON.stringify(invites)).map(i => ({ ...i, sender: i.senderData[0], team: i.team[0], senderData: undefined })));
 }
