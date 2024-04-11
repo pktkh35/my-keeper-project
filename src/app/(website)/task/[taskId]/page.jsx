@@ -1,7 +1,7 @@
 import { GROUPS, TASKS } from "@/models/db"
 import { redirect } from "next/dist/server/api-utils";
 import Link from 'next/link'
-import { Progress } from "@/components/ui/progress";
+import { ObjectId } from 'mongodb'
 import AddNewTask from "@/components/Task/AddNewTask";
 
 const page = async ({
@@ -11,9 +11,23 @@ const page = async ({
     const group = await GROUPS.findOne({
         _id: taskId
     })
-    const tasks = await TASKS.find({
-        taskId
-    })
+    const tasks = await TASKS.aggregate([
+        {
+            $match: {
+                taskId: new ObjectId(taskId)
+            }
+        },
+        {
+            $lookup: {
+                from: 'users',
+                localField: 'creator',
+                foreignField: 'email',
+                as: 'creatorData'
+            }
+        }
+    ])
+
+    console.log(tasks)
 
     if (!group) {
         redirect('/');
@@ -32,7 +46,7 @@ const page = async ({
                 </div>
             </div>
             <div className="flex flex-col gap-2 mt-2">
-                <AddNewTask taskId={taskId} tasks={tasks} />
+                <AddNewTask taskId={taskId} tasks={tasks.map(t => ({ ...t, creatorData: t.creatorData[0] }))} />
             </div>
         </div>
     </>
