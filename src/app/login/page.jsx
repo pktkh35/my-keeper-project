@@ -17,13 +17,13 @@ const Login = () => {
                 Welcome to <b className="text-orange-400">My Keeper</b>
             </p>
             <p className="text-sm opacity-60 text-white">
-                Let us help you manage your task to be more organized.
+                ให้เราช่วยคุณจัดการรายการสิ่งที่ต้องทำเพื่อให้เป็นระบบระเบียบและตรวจสอบง่ายมากขึ้น
             </p>
             <Button className="w-full mt-2" onClick={() => signIn("discord", {
                 callbackUrl: "/",
                 redirect: "/"
             })}>
-                Continute With Discord
+                เข้าสู่ระบบด้วย Discord
             </Button>
         </div>
         <div className="fixed h-12 flex items-center bottom-0 w-full justify-center text-white text-xs">

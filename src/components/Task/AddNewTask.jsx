@@ -54,32 +54,32 @@ const AddNewTask = ({
         <Dialog>
             <DialogTrigger asChild>
                 <Button>
-                    ADD NEW TASK <i className="fa-light fa-plus ml-2 text-xs opacity-60"></i>
+                    เพิ่มสิ่งที่ต้องทำ <i className="fa-light fa-plus ml-2 text-xs opacity-60"></i>
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <form onSubmit={onSumbit}>
                     <DialogHeader>
-                        <DialogTitle>Add New Task</DialogTitle>
+                        <DialogTitle>การเพิ่มสิ่งที่ต้องทำ</DialogTitle>
                     </DialogHeader>
                     <div className="w-full flex flex-col gap-2 mt-2">
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="name">Header</Label>
-                            <Input type="text" name="name" id="name" placeholder="Input Task Header" />
+                            <Label htmlFor="name">หัวข้อ</Label>
+                            <Input type="text" name="name" id="name" placeholder="กรอกหัวข้อสิ่งที่ต้องทำ" />
                         </div>
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="description">Description</Label>
-                            <Textarea type="text" name="description" id="description" placeholder="Input Task Description" />
+                            <Label htmlFor="description">คำอธิบาย</Label>
+                            <Textarea type="text" name="description" id="description" placeholder="กรอกคำอธิบายข้อสิ่งที่ต้องทำ" />
                         </div>
                     </div>
                     <DialogFooter className="mt-2 justify-start lg:justify-end">
                         <DialogClose asChild>
                             <Button type="button" variant="secondary" ref={ref}>
-                                Close
+                                ปิด
                             </Button>
                         </DialogClose>
                         <Button type="submit">
-                            Create
+                            เพิ่ม
                         </Button>
                     </DialogFooter>
                 </form>

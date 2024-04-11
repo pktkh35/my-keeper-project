@@ -25,7 +25,7 @@ const TeamsList = ({
         />
     </div> : <div className="w-full h-[650px] flex items-center justify-center text-xs font-bold bg-gray-50 rounded">
         <span className="opacity-60">
-            You{"'"}re not on any team.
+            คุณไม่ได้อยู่ในทีมไหนๆเลย
         </span>
     </div>
 }

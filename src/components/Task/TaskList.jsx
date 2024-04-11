@@ -84,9 +84,9 @@ const TaskList = ({
                         </div>
                     </ContextMenuTrigger>
                     <ContextMenuContent>
-                        <ContextMenuItem onClick={() => changeStatus(task._id, "waiting")}>Waiting</ContextMenuItem>
-                        <ContextMenuItem onClick={() => changeStatus(task._id, "processing")}>Processing</ContextMenuItem>
-                        <ContextMenuItem onClick={() => changeStatus(task._id, "success")}>Success</ContextMenuItem>
+                        <ContextMenuItem onClick={() => changeStatus(task._id, "waiting")}>กำลังรอ</ContextMenuItem>
+                        <ContextMenuItem onClick={() => changeStatus(task._id, "processing")}>กำลังทำ</ContextMenuItem>
+                        <ContextMenuItem onClick={() => changeStatus(task._id, "success")}>ทำเสร็จแล้ว</ContextMenuItem>
                     </ContextMenuContent>
                 </ContextMenu>
 

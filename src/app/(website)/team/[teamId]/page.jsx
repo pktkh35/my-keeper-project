@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { Each } from "@/components/Each";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+const isOwner = (member, team) => member.email === team.creator
+
 const page = async ({
     params
 }) => {
@@ -69,7 +71,14 @@ const page = async ({
                     <hr />
                     <div className="flex flex-col gap-2">
                         <Each
-                            of={team.membersData}
+                            of={team.membersData.reduce((acc, user) => {
+                                if (user.email === team.creator) {
+                                    acc.unshift(user);
+                                } else {
+                                    acc.push(user);
+                                }
+                                return acc;
+                            }, [])}
                             render={member => <div className="flex items-center justify-between gap-2 p-2 bg-gray-100 mt-1 rounded">
                                 <div className="flex items-center gap-2 text-xs font-bold">
                                     <Avatar className="w-7 h-7">

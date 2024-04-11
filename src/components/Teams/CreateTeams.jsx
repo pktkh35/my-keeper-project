@@ -43,35 +43,35 @@ const CreateTeams = () => {
     return <Dialog>
         <DialogTrigger asChild>
             <Button>
-                CREATE NEW TEAMS
+                สร้างทีม
             </Button>
         </DialogTrigger>
         <DialogContent>
             <form onSubmit={onSumbit}>
                 <DialogHeader>
-                    <DialogTitle>Create New Teams</DialogTitle>
+                    <DialogTitle>การสร้างทีมใหม่</DialogTitle>
                     <DialogDescription>
-                        You can invite member to your teams in setting page.
+                        คุณสามารถเชิญคนอื่นเข้ามาในทีมของคุณได้
                     </DialogDescription>
                 </DialogHeader>
                 <div className="w-full flex flex-col gap-2 mt-2">
                     <div className="grid w-full items-center gap-1.5">
-                        <Label htmlFor="name">Team Name</Label>
-                        <Input type="text" name="name" id="name" placeholder="Please, Enter Task Team Name" required />
+                        <Label htmlFor="name">ชื่อทีม</Label>
+                        <Input type="text" name="name" id="name" placeholder="ระบุชื่อทีมของคุณ" required />
                     </div>
                     <div className="grid w-full items-center gap-1.5">
-                        <Label htmlFor="description">Team Description</Label>
-                        <Textarea name="description" id="description" placeholder="Input Description" required />
+                        <Label htmlFor="description">คำอธิบาย</Label>
+                        <Textarea name="description" id="description" placeholder="ใส่คำอธิบายทีมของคุณ" />
                     </div>
                 </div>
                 <DialogFooter className="mt-2 justify-start lg:justify-end">
                     <DialogClose asChild>
                         <Button type="button" variant="secondary">
-                            Close
+                            ปิด
                         </Button>
                     </DialogClose>
                     <Button type="submit">
-                        Create
+                        สร้าง
                     </Button>
                 </DialogFooter>
             </form>

@@ -24,7 +24,7 @@ const GroupsList = ({
         />
     </div> : <div className="w-full h-[650px] flex items-center justify-center text-xs font-bold bg-gray-50 rounded">
         <span className="opacity-60">
-            This team dont have any task group.
+            ทีมนี้ยังไม่มีการสร้างหมวดหมู่
         </span>
     </div>
 }

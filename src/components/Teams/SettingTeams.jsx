@@ -74,31 +74,31 @@ const SettingTeams = ({
         <Dialog>
             <DialogTrigger asChild>
                 <Button>
-                    INVITE
+                    เชิญคน
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <form onSubmit={onSumbit}>
                     <DialogHeader>
-                        <DialogTitle>Invite People Into Team</DialogTitle>
+                        <DialogTitle>เชิญคนอื่นๆเข้าทีม</DialogTitle>
                         <DialogDescription>
-                            You can invite member to your teams in setting page.
+                            กรอกอีเมลของคนที่เราต้องการให้อยู่ในทีม
                         </DialogDescription>
                     </DialogHeader>
                     <div className="w-full flex flex-col mt-2">
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="email">Email</Label>
-                            <Input type="email" name="email" id="email" placeholder="Email" required />
+                            <Label htmlFor="email">อีเมล</Label>
+                            <Input type="email" name="email" id="email" placeholder="dummy@example.com" required />
                         </div>
                     </div>
                     <DialogFooter className="mt-2 justify-start lg:justify-end">
                         <DialogClose asChild>
                             <Button ref={inviteRef} type="button" variant="secondary">
-                                Close
+                                ปิด
                             </Button>
                         </DialogClose>
                         <Button type="submit">
-                            Submit
+                            ส่งคำเชิญ
                         </Button>
                     </DialogFooter>
                 </form>
@@ -140,35 +140,32 @@ const SettingTeams = ({
         <Dialog>
             <DialogTrigger asChild>
                 <Button>
-                    NEW GROUP
+                    สร้างหมวดหมู่ใหม่
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <form onSubmit={onSumbitGroup}>
                     <DialogHeader>
-                        <DialogTitle>Create New Group</DialogTitle>
-                        <DialogDescription>
-                            You can add task into this group.
-                        </DialogDescription>
+                        <DialogTitle>การสร้างหมวดหมู่ใหม่</DialogTitle>
                     </DialogHeader>
                     <div className="w-full flex flex-col mt-2 gap-2">
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="name">Group Name</Label>
-                            <Input type="text" name="name" id="name" placeholder="Input Group Name" required />
+                            <Label htmlFor="name">ชื่อหมวดหมู่</Label>
+                            <Input type="text" name="name" id="name" placeholder="กรุณาระบุชื่อหมวดหมู่" required />
                         </div>
                         <div className="grid w-full items-center gap-1.5">
-                            <Label htmlFor="description">Group Description</Label>
-                            <Textarea type="text" name="description" id="description" placeholder="Input Description" />
+                            <Label htmlFor="description">คำอธิบายหมวดหมู่</Label>
+                            <Textarea type="text" name="description" id="description" placeholder="ระบุคำอธิบายหมวดหมู่" />
                         </div>
                     </div>
                     <DialogFooter className="mt-2 justify-start lg:justify-end">
                         <DialogClose asChild>
                             <Button type="button" variant="secondary">
-                                Close
+                                ปิด
                             </Button>
                         </DialogClose>
                         <Button type="submit">
-                            Create
+                            สร้าง
                         </Button>
                     </DialogFooter>
                 </form>
