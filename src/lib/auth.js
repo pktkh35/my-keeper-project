@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import { getServerSession } from "next-auth"
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
 import DiscordProvider from "next-auth/providers/discord";
+import GoogleProvider from "next-auth/providers/google";
 import clientPromise from "./mongodb";
 
 const authOptions = {
@@ -18,6 +19,11 @@ const authOptions = {
         DiscordProvider({
             clientId: process.env.DISCORD_CLIENT_ID,
             clientSecret: process.env.DISCORD_CLIENT_SECRET
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            allowDangerousEmailAccountLinking: true,
         })
     ],
     pages: {

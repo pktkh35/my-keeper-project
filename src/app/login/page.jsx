@@ -19,6 +19,12 @@ const Login = () => {
             <p className="text-sm opacity-60 text-white">
                 ให้เราช่วยคุณจัดการรายการสิ่งที่ต้องทำเพื่อให้เป็นระบบระเบียบและตรวจสอบง่ายมากขึ้น
             </p>
+            <Button className="w-full mt-2" onClick={() => signIn("google", {
+                callbackUrl: "/",
+                redirect: "/"
+            })}>
+                เข้าสู่ระบบด้วย Google
+            </Button>
             <Button className="w-full mt-2" onClick={() => signIn("discord", {
                 callbackUrl: "/",
                 redirect: "/"
