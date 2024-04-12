@@ -1,5 +1,5 @@
 import { GROUPS, TASKS } from "@/models/db"
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import Link from 'next/link'
 import { ObjectId } from 'mongodb'
 import AddNewTask from "@/components/Task/AddNewTask";

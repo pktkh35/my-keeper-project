@@ -1,7 +1,7 @@
 import GroupsList from "@/components/Task/GroupsList";
 import SettingTeams from "@/components/Teams/SettingTeams";
 import { GROUPS, TEAMS } from "@/models/db"
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 import mongoose from 'mongoose'
 import Link from 'next/link'
 import { Each } from "@/components/Each";

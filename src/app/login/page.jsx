@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth"
 import Login from "./(page)/Login"
-import { redirect } from "next/dist/server/api-utils";
+import { redirect } from "next/navigation";
 
 const page = async () => {
     const session = await auth();

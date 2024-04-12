@@ -2,6 +2,7 @@ import CreateTeams from "@/components/Teams/CreateTeams";
 import TeamsList from "@/components/Teams/TeamsList";
 import { auth } from "@/lib/auth"
 import { TEAMS } from "@/models/db";
+import { redirect } from "next/navigation";
 
 const page = async () => {
   const session = await auth();
