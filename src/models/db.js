@@ -5,7 +5,7 @@ import { GROUPS } from "./schema/groups";
 import { INVITES } from "./schema/invites";
 
 if (mongoose.connect) {
-    mongoose.connect(process.env.MONGODB_URL);
+    mongoose.connect(process.env.MONGODB_URI);
     mongoose.Promise = global.Promise;
 }
 export {
