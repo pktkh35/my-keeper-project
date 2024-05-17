@@ -1,9 +1,26 @@
-import { GROUPS, TASKS } from "@/models/db"
+import { GROUPS, TASKS, TEAMS } from "@/models/db"
 import { redirect } from "next/navigation";
 import Link from 'next/link'
 import { ObjectId } from 'mongodb'
 import AddNewTask from "@/components/Task/AddNewTask";
 import { auth } from "@/lib/auth";
+
+export async function generateMetadata({ params, searchParams }, parent) {
+    const { taskId } = params;
+
+    const group = await GROUPS.findOne({
+        _id: taskId
+    });
+    
+    const team = await TEAMS.findOne({
+        _id: group.teamId
+    })
+    
+    return {
+        title:  group.name + " - " + team.name + " | My Keeper",
+        description: group.description,
+    }
+}
 
 const page = async ({
     params

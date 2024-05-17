@@ -9,16 +9,27 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 
 const isOwner = (member, team) => member.email === team.creator
+export async function generateMetadata({ params, searchParams }, parent) {
+    const _id = params.teamId;
+    const team = await TEAMS.findOne({
+        _id
+    })
+    
+    return {
+        title: team.name + " | My Keeper",
+        description: team.description,
+    }
+}
 
 const page = async ({
     params
 }) => {
     const session = await auth();
-  
+
     if (!session) {
-      redirect('/login');
+        redirect('/login');
     }
-  
+
     const teams = await TEAMS.aggregate([
         {
             $lookup: {
