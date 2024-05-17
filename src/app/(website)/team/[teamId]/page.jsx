@@ -14,7 +14,7 @@ export async function generateMetadata({ params, searchParams }, parent) {
     const team = await TEAMS.findOne({
         _id
     })
-    
+
     return {
         title: team.name + " | My Keeper",
         description: team.description,
