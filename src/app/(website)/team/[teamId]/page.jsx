@@ -18,6 +18,23 @@ export async function generateMetadata({ params, searchParams }, parent) {
     return {
         title: team.name + " | My Keeper",
         description: team.description,
+        openGraph: {
+            type: 'website',
+            url: `https://keeper.athens-groups.com/team/${_id}`,
+            title: team.name,
+            description: team.description,
+            images: [
+                {
+                    url: "https://keeper.athens-groups.com/img/logo.png"
+                }
+            ]
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: team.name,
+            description: team.description,
+            images: ["https://keeper.athens-groups.com/img/logo.png"],
+        },
     }
 }
 

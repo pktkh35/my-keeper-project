@@ -17,8 +17,25 @@ export async function generateMetadata({ params, searchParams }, parent) {
     })
     
     return {
-        title:  group.name + " - " + team.name + " | My Keeper",
+        title: group.name + " - " + team.name + " | My Keeper",
         description: group.description,
+        openGraph: {
+            type: 'website',
+            url: `https://keeper.athens-groups.com/task/${taskId}`,
+            title: group.name + " - " + team.name,
+            description: group.description,
+            images: [
+                {
+                    url: "https://keeper.athens-groups.com/img/logo.png"
+                }
+            ]
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: group.name + " - " + team.name,
+            description: group.description,
+            images: ["https://keeper.athens-groups.com/img/logo.png"],
+        },
     }
 }
 
